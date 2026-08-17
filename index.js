@@ -25,9 +25,9 @@ server.registerTool(
     description:
       "Full conjugation table for a verb in one of 14 European languages. " +
       "Input is the infinitive (e.g. 'aufstehen', 'appeler', 'vorbi'); " +
-      "the result covers every simple and composed tense of the " +
-      "language's written standard, validated against two independent " +
-      "gold lexicons.",
+      "the result covers the language's written standard, validated " +
+      "against two independent gold lexicons. Field reference: " +
+      "https://www.ablaut.dev/api",
     inputSchema: {
       verb: z.string().describe("The infinitive to conjugate"),
       language: z

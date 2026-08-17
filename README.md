@@ -10,7 +10,9 @@ The API is in early access and requires a key, passed via the
 `ABLAUT_API_KEY` environment variable. Request one at
 [ablaut.dev](https://www.ablaut.dev) (the API dialog).
 
-Try the engine in the browser at [ablaut.dev](https://www.ablaut.dev).
+Try the engine in the browser at [ablaut.dev](https://www.ablaut.dev);
+full API and response-shape reference at
+[ablaut.dev/api](https://www.ablaut.dev/api).
 
 ## Setup
 
