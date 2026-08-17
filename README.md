@@ -52,7 +52,7 @@ per-language accuracy and adjudication logs.
 ## Hosted API
 
 We are building a hosted conjugation API (REST and remote MCP):
-sub-millisecond responses, EU-hosted, one endpoint for all languages.
+sub-millisecond responses, one endpoint for all languages.
 Interested? Tell us at [ablaut.dev](https://www.ablaut.dev).
 
 ## License
