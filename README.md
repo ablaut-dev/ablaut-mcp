@@ -1,9 +1,10 @@
 # ablaut-mcp
 
 An [MCP](https://modelcontextprotocol.io) server that lets AI agents
-conjugate verbs in 15 European languages. It wraps the
-[ablaut](https://github.com/ablaut-dev/ablaut) engine as WebAssembly, so
-everything runs locally: no network, no API key, microsecond answers.
+conjugate verbs in 15 European languages. Each tool call is one request
+to the hosted [ablaut](https://github.com/ablaut-dev/ablaut) API, where
+the engine runs as native Rust: no local build, sub-millisecond compute,
+CDN-cached responses. Set `ABLAUT_API_URL` to point at another instance.
 
 Try the engine in the browser at [ablaut.dev](https://www.ablaut.dev).
 
