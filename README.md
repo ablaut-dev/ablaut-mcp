@@ -2,7 +2,7 @@
 
 An [MCP](https://modelcontextprotocol.io) server that lets AI agents
 conjugate verbs in 15 European languages. It wraps the
-[ablaut](https://github.com/v4nn4/ablaut) engine as WebAssembly, so
+[ablaut](https://github.com/ablaut-dev/ablaut) engine as WebAssembly, so
 everything runs locally: no network, no API key, microsecond answers.
 
 Try the engine in the browser at [ablaut.dev](https://www.ablaut.dev).
@@ -41,7 +41,7 @@ Claude Desktop, Cursor, or any other MCP client:
 German, French, Spanish, Portuguese, Italian, Romanian, Swedish,
 English, Danish, Czech, Slovenian, Estonian, Finnish, and Irish.
 Every language is validated against two independent gold lexicons;
-see the [ablaut repository](https://github.com/v4nn4/ablaut) for
+see the [ablaut repository](https://github.com/ablaut-dev/ablaut) for
 per-language accuracy and adjudication logs.
 
 ## Hosted API
