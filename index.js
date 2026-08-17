@@ -11,7 +11,9 @@ const BASE = (process.env.ABLAUT_API_URL ?? "https://api.ablaut.dev").replace(/\
 const server = new McpServer({ name: "ablaut", version: "0.2.0" });
 
 async function call(path) {
-  const res = await fetch(`${BASE}${path}`);
+  const headers = {};
+  if (process.env.ABLAUT_API_KEY) headers["x-api-key"] = process.env.ABLAUT_API_KEY;
+  const res = await fetch(`${BASE}${path}`, { headers });
   const body = await res.text();
   return { ok: res.ok, body };
 }
