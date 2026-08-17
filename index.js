@@ -21,7 +21,7 @@ server.registerTool(
   {
     title: "Conjugate a verb",
     description:
-      "Full conjugation table for a verb in one of 15 European languages. " +
+      "Full conjugation table for a verb in one of 14 European languages. " +
       "Input is the infinitive (e.g. 'aufstehen', 'appeler', 'vorbi'); " +
       "the result covers every simple and composed tense of the " +
       "language's written standard, validated against two independent " +
@@ -66,7 +66,7 @@ server.registerTool(
   {
     title: "List supported languages",
     description:
-      "The 15 languages ablaut conjugates, with their codes and maturity status (beta: verified at 100% against two gold lexicons; wip: known gaps).",
+      "The 14 languages ablaut conjugates, with their codes and maturity status (beta: verified at 100% against two gold lexicons; wip: known gaps).",
     inputSchema: {},
   },
   async () => {
