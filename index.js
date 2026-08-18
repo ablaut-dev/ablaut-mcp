@@ -64,6 +64,37 @@ server.registerTool(
 );
 
 server.registerTool(
+  "find_infinitive",
+  {
+    title: "Find the infinitive of a conjugated form",
+    description:
+      "Reverse lookup: given any conjugated form and a language, " +
+      "returns the infinitive(s) whose paradigm contains it, with the " +
+      "slots it occupies (e.g. 'suis' in French matches both être and " +
+      "suivre). Full coverage for fr/es/de/en; irregular forms in all " +
+      "14 languages.",
+    inputSchema: {
+      form: z.string().describe("The conjugated form to look up"),
+      language: z
+        .string()
+        .describe("Language code (ISO 639-1, ISO 639-3, or an English name)"),
+    },
+  },
+  async ({ form, language }) => {
+    try {
+      const params = new URLSearchParams({ form, lang: language });
+      const { ok, body } = await call(`/v1/lemma?${params}`);
+      return { content: [{ type: "text", text: body }], isError: !ok };
+    } catch (e) {
+      return {
+        content: [{ type: "text", text: `ablaut API unreachable: ${String(e)}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+server.registerTool(
   "list_languages",
   {
     title: "List supported languages",

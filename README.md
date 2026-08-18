@@ -41,6 +41,9 @@ Claude Desktop, Cursor, or any other MCP client:
   infinitive, covering every simple and composed tense of the
   language's written standard. Language codes are ISO 639-1 (`fr`),
   ISO 639-3 (`fra`), or English names (`French`), case-insensitive.
+- **find_infinitive** `(form, language)`: reverse lookup — the
+  infinitive(s) a conjugated form belongs to, with the slots it
+  occupies (`suis` matches both *être* and *suivre*).
 - **list_languages**: supported languages and their maturity status.
 
 ## Languages
