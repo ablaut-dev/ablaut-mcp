@@ -12,6 +12,9 @@
   "bin": {
     "ablaut-mcp": "index.js"
   },
+  "scripts": {
+    "build": "node --check index.js"
+  },
   "files": [
     "index.js",
     "LICENSE-MIT",
