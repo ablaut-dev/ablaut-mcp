@@ -8,7 +8,7 @@ import { z } from "zod";
 
 const BASE = (process.env.ABLAUT_API_URL ?? "https://api.ablaut.dev").replace(/\/$/, "");
 
-const server = new McpServer({ name: "ablaut", version: "0.2.0" });
+const server = new McpServer({ name: "ablaut", version: "0.3.1" });
 
 async function call(path) {
   const headers = {};
@@ -37,6 +37,19 @@ server.registerTool(
           "Language code (ISO 639-1 like 'fr', ISO 639-3 like 'fra', or an English name like 'French'). Defaults to German."
         ),
     },
+    outputSchema: {
+      verb: z.string(),
+      lang: z.string(),
+      table: z
+        .record(z.any())
+        .describe("The conjugation table; fields are language-specific"),
+    },
+    annotations: {
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false,
+    },
   },
   async ({ verb, language }) => {
     try {
@@ -53,7 +66,7 @@ server.registerTool(
           isError: true,
         };
       }
-      return { content: [{ type: "text", text: body }] };
+      return { content: [{ type: "text", text: body }], structuredContent: JSON.parse(body) };
     } catch (e) {
       return {
         content: [{ type: "text", text: `ablaut API unreachable: ${String(e)}` }],
@@ -79,12 +92,31 @@ server.registerTool(
         .string()
         .describe("Language code (ISO 639-1, ISO 639-3, or an English name)"),
     },
+    outputSchema: {
+      form: z.string(),
+      matches: z.array(
+        z.object({
+          infinitive: z.string(),
+          slots: z
+            .array(z.string())
+            .describe("Where the form occurs, e.g. 'present 1sg'"),
+        })
+      ),
+    },
+    annotations: {
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false,
+    },
   },
   async ({ form, language }) => {
     try {
       const params = new URLSearchParams({ form, lang: language });
       const { ok, body } = await call(`/v1/lemma?${params}`);
-      return { content: [{ type: "text", text: body }], isError: !ok };
+      return ok
+        ? { content: [{ type: "text", text: body }], structuredContent: JSON.parse(body) }
+        : { content: [{ type: "text", text: body }], isError: true };
     } catch (e) {
       return {
         content: [{ type: "text", text: `ablaut API unreachable: ${String(e)}` }],
@@ -101,11 +133,29 @@ server.registerTool(
     description:
       "The 14 languages ablaut conjugates, with their codes and maturity status (beta: verified at 100% against two gold lexicons; wip: known gaps).",
     inputSchema: {},
+    outputSchema: {
+      languages: z.array(
+        z.object({
+          code: z.string(),
+          iso3: z.string(),
+          name: z.string(),
+          status: z.string(),
+        })
+      ),
+    },
+    annotations: {
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false,
+    },
   },
   async () => {
     try {
       const { ok, body } = await call("/v1/languages");
-      return { content: [{ type: "text", text: body }], isError: !ok };
+      return ok
+        ? { content: [{ type: "text", text: body }], structuredContent: JSON.parse(body) }
+        : { content: [{ type: "text", text: body }], isError: true };
     } catch (e) {
       return {
         content: [{ type: "text", text: `ablaut API unreachable: ${String(e)}` }],
