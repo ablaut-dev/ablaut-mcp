@@ -23,7 +23,7 @@ server.registerTool(
   {
     title: "Conjugate a verb",
     description:
-      "Full conjugation table for a verb in one of 14 European languages. " +
+      "Full conjugation table for a verb in one of 20+ languages. " +
       "Input is the infinitive (e.g. 'aufstehen', 'appeler', 'vorbi'); " +
       "the result covers the language's written standard, validated " +
       "against two independent gold lexicons. Field reference: " +
@@ -85,7 +85,7 @@ server.registerTool(
       "returns the infinitive(s) whose paradigm contains it, with the " +
       "slots it occupies (e.g. 'suis' in French matches both être and " +
       "suivre). Full coverage for fr/es/de/en; irregular forms in all " +
-      "14 languages.",
+      "20+ languages.",
     inputSchema: {
       form: z.string().describe("The conjugated form to look up"),
       language: z
@@ -131,7 +131,7 @@ server.registerTool(
   {
     title: "List supported languages",
     description:
-      "The 14 languages ablaut conjugates, with their codes and maturity status (beta: verified at 100% against two gold lexicons; wip: known gaps).",
+      "The 20+ languages ablaut conjugates, with their codes and maturity status (beta: verified at 100% against two gold lexicons; wip: known gaps).",
     inputSchema: {},
     outputSchema: {
       languages: z.array(
